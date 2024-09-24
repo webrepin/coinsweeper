@@ -16,6 +16,7 @@ git clone https://github.com/officialputuid/coinsweeper && cd coinsweeper && npm
 
 ## Usage
 | | |
-|--------------------------|--------------------------------|
-| `node coinsweeper`           | Start coinsweeper.         |
-| `node coinsweeper-proxy`     | Start with proxy support.  |
+|--------------------------|---------------------------------------|
+| `node coinsweeper`           | Start coinsweeper.                |
+| `node coinsweeper-proxy`     | Start with proxy support.         |
+| `node coinsweeper-auto-ref`  | Start coinsweeper Auto Referral.  |
