@@ -68,10 +68,10 @@ class ByBit {
     async login(userData, proxyAgent) {
         const url = "https://api.bybitcoinsweeper.com/api/auth/login";
         const payload = {
-            firstName: userData.first_name,
-            lastName: userData.last_name || "",
-            telegramId: userData.id.toString(),
-            userName: userData.username
+            firstName: userData.firstName,
+            lastName: userData.lastName || "",
+            telegramId: userData.telegramId.toString(),
+            userName: userData.userName
         };
 
         try {
@@ -163,7 +163,7 @@ class ByBit {
         while (true) {
             for (let i = 0; i < data.length; i++) {
                 const initData = data[i];
-                const userData = JSON.parse(decodeURIComponent(initData.split('user=')[1].split('&')[0]));
+                const userData = JSON.parse(initData);
                 const proxy = this.proxies[i % this.proxies.length];
                 const proxyAgent = new HttpsProxyAgent(proxy);
 
@@ -175,7 +175,7 @@ class ByBit {
                     continue;
                 }
 
-                console.log(`========== Account ${i + 1} | ${userData.first_name.green} | ip: ${proxyIP} ==========`);
+                console.log(`========== Account ${i + 1} | ${userData.firstName.green} | ip: ${proxyIP} ==========`);
 
                 this.log(`Logging into account ${userData.id}...`, 'info');
                 const loginResult = await this.login(userData, proxyAgent);

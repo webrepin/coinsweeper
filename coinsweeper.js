@@ -58,10 +58,10 @@ class ByBit {
     async login(userData) {
         const url = "https://api.bybitcoinsweeper.com/api/auth/login";
         const payload = {
-            firstName: userData.first_name,
-            lastName: userData.last_name || "",
-            telegramId: userData.id.toString(),
-            userName: userData.username
+            firstName: userData.firstName,
+            lastName: userData.lastName || "",
+            telegramId: userData.telegramId.toString(),
+            userName: userData.userName
         };
 
         try {
@@ -85,7 +85,7 @@ class ByBit {
     async score() {
         for (let i = 0; i < 3; i++) {
             try {
-                const gametime = Math.floor(Math.random() * (300 - 90 + 1)) + 90; // 90 to 300 seconds (1.5 to 5 minutes)
+                const gametime = Math.floor(Math.random() * (200 - 90 + 1)) + 35; // 90 to 300 seconds (1.5 to 5 minutes)
                 const score = Math.floor(Math.random() * (900 - 600 + 1)) + 600; // 600 to 900 points
                 
                 this.log(`Starting game ${i + 1}/3. Play time: ${gametime} seconds`, 'info');
@@ -133,9 +133,10 @@ class ByBit {
         while (true) {
             for (let i = 0; i < data.length; i++) {
                 const initData = data[i];
-                const userData = JSON.parse(decodeURIComponent(initData.split('user=')[1].split('&')[0]));
+                console.log(initData);
+                const userData = JSON.parse(initData);
 
-                console.log(`========== Account ${i + 1} | ${userData.first_name.green} ==========`);
+                console.log(`========== Account ${i + 1} | ${userData.firstName.green} ==========`);
 
                 this.log(`Logging into account ${userData.id}...`, 'info');
                 const loginResult = await this.login(userData);
